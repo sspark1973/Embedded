@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-typedef unsigned int dword;
+typedef unsigned long dword;
 volatile dword *pwr_cfg;
 pwr_cfg = (volatile dword *)0x7E00F804;
 
