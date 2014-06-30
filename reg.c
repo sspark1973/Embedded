@@ -1,10 +1,12 @@
 #include <stdio.h>
 
-typedef unsigned long dword;
-volatile dword *pwr_cfg;
-//pwr_cfg = (volatile dword *)0x7E00F804;
+#define DEBUG_PORT ((unsigned char*)(0x7E00F804))
 
-void set_pwr_cfg(dword value)
+//typedef unsigned long dword;
+volatile unsigned char *pwr_cfg;
+pwr_cfg = (volatile unsigned char *)DEBUG_PORT;
+
+void set_pwr_cfg(unsigned char value)
 {
   *pwr_cfg = value;
 }
