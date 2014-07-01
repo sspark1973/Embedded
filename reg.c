@@ -8,6 +8,18 @@
 unsigned char *pwr_cfg = (unsigned char *)DEBUG_PORT;
 //pwr_cfg = (unsigned char *)DEBUG_PORT;
 
+/* C99 adds support for flexible array members to structures. 
+This form of array declaration is allowed as the last element in structures only, 
+and differs from normal arrays in that no length is specified to the compiler. 
+For a structure named s containing a flexible array member named a, 
+sizeof s is therefore equivalent to offsetof(s, a):
+
+Thus, in this case the sizeof operator returns the size of the structure, 
+including any padding, 
+but without any storage allowed for the array. 
+In the above example, the following output will be produced on most platforms:
+sizeof (struct flexarray) = 4
+*/
 struct flexarray
 {
   char val;
