@@ -5,7 +5,7 @@
 #define DEBUG_PORT ((unsigned char*)(0x7E00F804))
 
 //typedef unsigned long dword;
-unsigned char *pwr_cfg = (unsigned char *)DEBUG_PORT;
+volatile unsigned char *pwr_cfg = (volatile unsigned char *)DEBUG_PORT;
 //unsigned char *pwr_cfg;
 //pwr_cfg = DEBUG_PORT;
 
