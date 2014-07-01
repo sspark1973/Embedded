@@ -11,8 +11,8 @@ typedef long unsigned int dword;
 #define HWCIO_MCU_CLK_HALF_VALUE 0x2
 
 #define IO_OUT(target, val) \
-(*((volatile dword *)(HWCIO_##target##_ADDR)) = \
-((dword)(HWCIO_##target##_##val##_VALUE & HWCIO_##target##_MSK)
+(*((volatile dword *)(HWCIO_##target##_ADDR))) = \
+((dword)(HWCIO_##target##_##val##_VALUE & HWCIO_##target##_MSK))
 
 
 /*
