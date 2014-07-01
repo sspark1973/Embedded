@@ -61,7 +61,7 @@ int main(int argc, char **argv)
   
   IO_OUT(MCU_CLK, TWICE);
   
-  printf("%d\n", *HWCIO_MCU_CLK_ADDR);
+  printf("%d\n", (*((volatile dword *)(HWCIO_MCU_CLK_ADDR))));
   
   return 0;
 }
