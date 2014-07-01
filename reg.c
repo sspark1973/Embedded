@@ -7,7 +7,7 @@
 //typedef unsigned long dword;
 //unsigned char *pwr_cfg = (unsigned char *)DEBUG_PORT;
 unsigned char *pwr_cfg;
-(unsigned char *)pwr_cfg = (unsigned char *)DEBUG_PORT;
+pwr_cfg = DEBUG_PORT;
 
 /* C99 adds support for flexible array members to structures. 
 This form of array declaration is allowed as the last element in structures only, 
