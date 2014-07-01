@@ -47,3 +47,34 @@ int main(int argc, char **argv)
   
   return 0;
 }
+
+/*
+if (x>10)
+do { 
+scanf ("%d", &x); 
+printf ("\n%d", x); 
+} while (0);
+else
+system_exit() ;
+
+괄호만 넣으면 되지 않느냐 하는 의문이 생기시겠지만 만약 괄호만 넣어주고서 한번 해볼까요?
+
+#define READ_PRINT_VALUE(x)
+{ \
+scanf ("%d", &x); \
+printf ("\n%d", x); \
+} 
+
+요렇게 해주면, 어떻게 해석되느냐
+
+if (x>10)
+{ 
+scanf ("%d", &x); 
+printf ("\n%d", x); 
+} ;
+else
+system_exit() ;
+
+else 앞에 왠 의미 없는 ;가 하나 들어 갔죠.
+*/
+
