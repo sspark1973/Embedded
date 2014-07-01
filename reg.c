@@ -24,6 +24,7 @@ sizeof (struct flexarray) = 4
 struct flexarray
 {
   char val;
+  char val2;
   int array[];
 };
 
