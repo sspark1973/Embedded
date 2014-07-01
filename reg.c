@@ -39,6 +39,7 @@ int main(int argc, char **argv)
   printf("%d\n", sizeof(int));
   
   printf("offsetof (flexarray, val) = %d\n", offsetof(struct flexarray, val));
+  printf("offsetof (flexarray, val2) = %d\n", offsetof(struct flexarray, val2));
   printf("offsetof (flexarray, array) = %d\n", offsetof(struct flexarray, array));
   printf("sizeof (struct flexarray) = %d\n", sizeof(struct flexarray));
   
