@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "type_def.h"
+//#include "type_def.h"
 
 #define DEBUG_PORT ((unsigned char*)(0x7E00F804))
 
