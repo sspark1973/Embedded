@@ -1,3 +1,5 @@
+#include "type_def.h"
+
 typedef struct
 {
   int32 flag:3;
