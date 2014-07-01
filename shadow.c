@@ -3,8 +3,8 @@
 typedef struct
 {
   int32 flag:3;
-      data_1:20;
-      data_2:9;
+  int32 data_1:20;
+  int32 data_2:9;
 } REGISTER_SHADOW;
 
 int main(int argc, char **argv)
