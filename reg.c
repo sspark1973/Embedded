@@ -14,7 +14,7 @@ void set_pwr_cfg(unsigned char value)
 
 void main()
 {
-  printf("%zu\n", sizeof(unsigned char));
-  printf("%zu\n", sizeof(int));
+  printf("%d\n", sizeof(unsigned char));
+  printf("%d\n", sizeof(int));
   return;
 }
