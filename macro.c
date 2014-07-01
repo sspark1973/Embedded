@@ -34,9 +34,9 @@ Compiler가 에라!
 
 
 #define READ_PRINT_VALUE(x)
-do {
-  scanf("%d", &x);
-  printf("\n%d",x);
+do { \
+  scanf("%d", &x); \
+  printf("\n%d",x); \
 } while(0)
 
 int main(int argc, char **argv)
