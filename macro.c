@@ -2,6 +2,16 @@
 
 typedef long unsigned int dword;
 
+/*
+MCU의 clock을 configuration할 수 있는 주소와 값들을 Macro로 정했다고 해보죠. 
+MCU의 Data Sheet를 보았더니 그 주소가 0xC000CB00이고요, 32bit register이고요, 
+그 중에 LSB bit 2,3이 MCU의 Data 이고요. Read, Write가 모두 가능한 Register이고요, 
+LSB 2,3bit가 
+0x0인 경우에는 Clock을 disable 하는 거고, 
+0x1인 경우에는 Clock을 enable 하는 거고, 
+0x2인 경우에는 enable된 Clock의 주기를 반으로 줄이는 거고, 
+0x3인 경우에는 enable된 Clock의 주기를 두 배로 올리는 거라면요!
+*/
 #define HWCIO_MCU_CLK_ADDR 0xC000CB00
 #define HWCIO_MCU_CLK_MSK 0x3
 #define HWCIO_MCU_CLK_SHIFT 0x2
@@ -10,10 +20,10 @@ typedef long unsigned int dword;
 #define HWCIO_MCU_CLK_TWICE_VALUE 0x3
 #define HWCIO_MCU_CLK_HALF_VALUE 0x2
 
+
 #define IO_OUT(target, val) \
 (*((volatile dword *)(HWCIO_##target##_ADDR))) = \
-((dword)(HWCIO_##target##_##val##_VALUE & HWCIO_##target##_MSK))
-
+((dword)(HWCIO_##target##_##val##_VALUE & HWCIO_##target##_MSK) << HWCIO_##target##_SHIFT)
 
 /*
 #define READ_PRINT_VALUE(x) \
@@ -59,6 +69,7 @@ int main(int argc, char **argv)
   
   READ_PRINT_VALUE(value);
   
+  /* Clock을 살리고 2배로 뻥튀기 시키고 싶을 때, */
   IO_OUT(MCU_CLK, TWICE);
   
   printf("%d\n", (*((volatile dword *)(HWCIO_MCU_CLK_ADDR))));
