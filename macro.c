@@ -12,7 +12,7 @@ typedef long unsigned int dword;
 
 #define IO_OUT(target, val) \
 (*((volatile dword *)(HWCIO_##target##_ADDR)) = \
-((dword)(HWCIO_##target##_##val##_VALUE & HWCIO__##target##_MSK)
+((dword)(HWCIO_##target##_##val##_VALUE & HWCIO_##target##_MSK)
 
 
 /*
