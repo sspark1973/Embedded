@@ -59,6 +59,10 @@ int main(int argc, char **argv)
   
   READ_PRINT_VALUE(value);
   
+  IO_OUT(MCU_CLK, TWICE);
+  
+  printf("%d\n", *HWCIO_MCU_CLK_ADDR);
+  
   return 0;
 }
 
