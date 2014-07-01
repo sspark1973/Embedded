@@ -7,14 +7,23 @@
 unsigned char *pwr_cfg = (unsigned char *)DEBUG_PORT;
 //pwr_cfg = (unsigned char *)DEBUG_PORT;
 
+struct flexarray
+{
+  char val;
+  int array[];
+};
+
 void set_pwr_cfg(unsigned char value)
 {
   *pwr_cfg = value;
 }
 
-void main()
+int main(int argc, char **argv)
 {
   printf("%d\n", sizeof(unsigned char));
   printf("%d\n", sizeof(int));
-  return;
+  
+  printf("sizeof (struct flexarray) = %d\n", sizeof(struct flexarray));
+  
+  return 0;
 }
