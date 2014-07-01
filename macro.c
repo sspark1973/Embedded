@@ -33,7 +33,7 @@ Compiler가 에라!
 */
 
 
-#define READ_PRINT_VALUE(x)
+#define READ_PRINT_VALUE(x) \
 do { \
   scanf("%d", &x); \
   printf("\n%d",x); \
