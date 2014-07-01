@@ -1,4 +1,5 @@
 #include "type_def.h"
+#include <stdio.h>
 
 typedef struct
 {
