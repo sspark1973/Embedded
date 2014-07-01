@@ -16,6 +16,8 @@ int main(int argc, char **argv)
   R_0.data_1 = 16;
   R_0.data_2 = 22;
   
+  printf("flag[%d] data1[%d] data2[%d]\n", R_0.flag, R_0.data_1, R_0.data_2);
+  
   if(reg_data & 0x20) // binary 100000 - mask
   if(reg_data >> 6 & 0x1) // if(reg_data & (1<<6))
   if(reg_data >> 6 & 0x3) // 2 bits
