@@ -1,5 +1,19 @@
 #include <stdio.h>
 
+typedef long unsigned int dword;
+
+#define HWCIO_MCU_CLK_ADDR 0xC000CB00
+#define HWCIO_MCU_CLK_MSK 0x3
+#define HWCIO_MCU_CLK_SHIFT 0x2
+#define HWCIO_MCU_CLK_DIS_VALUE 0x0
+#define HWCIO_MCU_CLK_EN_VALUE 0x0
+#define HWCIO_MCU_CLK_TWICE_VALUE 0x3
+#define HWCIO_MCU_CLK_HALF_VALUE 0x2
+
+#define IO_OUT(target, val) \
+(*((volatile dword *)(HWCIO_##target##_ADDR)) = \
+((dword)(HWCIO_##target##_##val##_VALUE & HWCIO__##target##_MSK)
+
 
 /*
 #define READ_PRINT_VALUE(x) \
