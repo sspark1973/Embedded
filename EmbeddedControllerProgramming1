@@ -1,0 +1,29 @@
+solderless breadboard : 납땜할 수 없는
+
+AVR "Dragon" development board 
+ATiny44 microcontroller - 8bit / In-system Programmable Flash
+AVR Studio
+
+Little Endian/Big Endian
+  메모리에서 데이타를 서열화하는 방법 - Byte Ordering / UNIX - NUXI (1 word - 2 bytes )
+  Processor가 Memory에 저장하는 방식
+  dword는 4byte, word는 2byte, byte는 8bit 크기
+  dword 0x12345678, word 0x1234, 또는 byte 0x12를 0x1000번지부터 저장하는 방식
+          BE                LE
+  0x1000  0x12  0x12  0x12  0x78  0x34  0x12
+  0x1001  0x34  0x34        0x56  0x12
+  0x1002  0x56              0x34
+  0x1003  0x78              0x12
+  
+  BE :  사람이 읽기에 편하다.
+  LE : 상위bit(MSB)를 상위 주소에 저장 - 
+      ARM ( default - Co processor 레지스터 CP15를 통해서 Big Endian으로 만들 수 있다)
+  
+  0x12345678
+          BE    LE
+  0x1003  0x78  0x12
+  0x1002  0x56  0x34
+  0x1001  0x34  0x56
+  0x1000  0x12  0x78
+  
+  MSB 0x10001100 LSB : MSB 2bit = 10 / LSB 4bit = 1100 
