@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "type_def.h"
 
 bool8 isLittleEndian()
 {
