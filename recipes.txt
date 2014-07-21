@@ -1,0 +1,69 @@
+% Pointer와 Array는 소녀시대와 원더걸스 , 그리고 이중포인터
+
+이중 pointer는 Pointer를 가리키는 Pointer라는 뜻이고요, 
+실은 Pointer도 메모리 어딘가에 자리 잡고 있는 변수 인 거에요.
+
+pointer를 함수의 passing parameter로 제대로 넘겨 주려면 pointer의 주소를 넘겨주고, 
+이중 pointer로 받아 주어야 그 주소를 제대로 넘겨 받을 수 있게 되는 거지요. 
+
+  void gettag (char **ptag)
+  {
+    *ptag=(char *)malloc(40);
+    strncpy(*ptag,"pointer tag", sizeof(char)*40);
+  }
+ 
+  void process()
+  {
+    char *tag;
+ 
+    gettag(&tag);
+    free(tag);
+  }
+
+% Stack의 정체와 자세히 보기 - initialization까지
+
+보통 사용하는 stack은 Full Descending으로 구현되어, 
+더 낮은 주소로 Stack이 자라고, SP가 가리키는 주소는 Valid Data를 품고 있다.
+
+  stmdb r9!, (r0,r1,r5) == stmfd 
+  /* 
+    (r5 -> r1 -> r0 : r9는 r0를 가리키고 있다.)
+    하지만 Memory 값을 생각해보면 (Jtag같은데서)...
+                        0        4        8  
+    0x1f6e9390 : 00000000 00000001 00000002
+                       r0       r1       r5    
+  */  
+  ARM state - stack 관련 Multiple Register Transfer
+  Thumb state - Push/Pop
+  
+  push {r4, r14}
+  ...
+  pop {r4, r14}
+
+일반 Symbol과는 달리 로컬변수는 달리 Stack에 저장되니깐 개인 Address가 없다. 그래서 함수 내에서만 유지된다.
+Symbol이라 함은 Physical 주소를 점유 - 함수의 이름
+
+int (* function)(int a);
+int recipe(int a)
+  function = recipe or &recipe // recipe() - X
+
+int (* function[4])(int, int) = { plus, minus, multiply, divide }
+  function[2](1,3) -> multiply(1,3)
+
+
+% RTOS 와 Kernel
+RTOS - 기본적으로 Multi Tasking과 Interrupt 처리 기능을 가진다. 
+  Hard : 응답시간 자체가 Functional Requirement가 됩 - 보통 군사용 기기
+  Soft : 최대한 빨리 응답하기만 하면 요구사항을 맞출 수 있다. - 보통 우리가 다루는 RTOS
+    리눅스도 Preemption Scheduling Policy 채용
+
+% Task 구조와 Signal
+Task > Process, Task > Thread
+Process는 자신 만의 고유한 Memory Space를 할당받는다.
+Thread는 모든 주소 공간이 공유
+
+
+
+
+
+
