@@ -12,6 +12,13 @@ bool8 isLittleEndian()
   return *ptr;
 }
 
+void show_mem_rep(char *start, int n)
+{
+	int i;
+	for(i=0; i < n; i++)
+		printf("[%#x]%.2x\t", &start[i], start[i]);
+	printf("\n");
+}
 
 main()
 {
@@ -28,4 +35,8 @@ main()
     printf("????\n");
     
   isLittleEndian();
+
+  int i = 0x01234567;
+  show_mem_rep((char *)&i, sizeof(i));
+  
 }
