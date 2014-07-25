@@ -1,3 +1,29 @@
+% MMU (Memory Management Unit)
+  1. Task 마다 또는 프로그램 마다 똑같은 주소를 사용해도 되게 만들어 준다.
+  2. 두개의 CS를 사용하는 RAM의 물리적 주소가 CS1:0x00000~0x10000, CS2:0x20000~0x30000 이렇게 나뉘어져 있어도 MMU만 잘 사용하면
+  0x00000~0x20000으로 연속적인 것처럼 사용할 수 있다.
+  3. Physical Address상에서는 쓰고 남은 조각조각 난 Memory들을 한데 모아서 마치 연속적인 Memory처럼 사용할 수도 있다.
+  4. CPU-(Virtual Address)->MMU->(Physical Address)->Memory
+  5. Memory영역의 특성을 조작(Cache/Non Cache/Write Bufferable/Non Write Bufferable/ReadOnly)
+  6. TTB(Translation Table Base Address)
+  7. Linux - 물리 주소를 가상 주소로 매핑하는 방법
+    1.	mmap() – 응용 프로그램의 프로세스 가상 주소에 매핑
+    2.	ioremap() – 커널의 가상 주소에 매핑하는 방법
+
+% 낸드플래시가 뭐죠
+  낸드 플래시의 인터널 램 - 낸드 플래시에 있는 부트로더를 동작시키는 일
+  부트로더는 낸드에 있는 바이너리를 SDRAM에 로딩.
+  
+  
+% Bootloader와 Memory Budget (Mapfile) 어떻게 변수초기화를 할 것인다.
+  Loader - ROM에서 RAM으로 뭔가를 싣는다.
+  Boot Loader - HW 초기화 / RAM으로 로딩
+  MCP - Multi Chip Package
+  ROM : RO - code와 const data / RW - 초기값이 있는 Global변수
+    Scatter loading - Load View : Load$$ROM$$
+  RAM : ZI-Dynamic하게 생성. / RW / RO는 메모리에 따라 NAND의 경우엔 RAM에 복사
+    Scatter loading - Execution View : Image$$RAM_1$$
+
 % Pointer와 Array는 소녀시대와 원더걸스 , 그리고 이중포인터
 
 이중 pointer는 Pointer를 가리키는 Pointer라는 뜻이고요, 
@@ -33,8 +59,8 @@ pointer를 함수의 passing parameter로 제대로 넘겨 주려면 pointer의 
     0x1f6e9390 : 00000000 00000001 00000002
                        r0       r1       r5    
   */  
-  ARM state - stack 관련 Multiple Register Transfer
-  Thumb state - Push/Pop
+  ARM state - stack 관련 Multiple Register Transfer / BL
+  Thumb state - Push/Pop / BLX
   
   push {r4, r14}
   ...
