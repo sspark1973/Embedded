@@ -1,3 +1,43 @@
+% Pull up, Pull down 그리고 Open Collector
+  Low Active : 0에서 동작 : CS/, CS_N, CS* ...
+    Pull-up : default 1 (전원쪽에 저항)
+  High Active : 1에서 동작 : CS
+    Pull-down : default 0 (GND쪽에 저항)
+    
+  Gate모임들을 프로그래밍 -> VHDL/verilog -> chip -> FPGA
+
+% 초간단 회로이론 R 저항 L 인덕터 C 캐패시터
+  저항 : 특정부분에 흐르는 전류의 양을 제한 / 전압 감소 
+    R이 클수록 전류를 더 조금 흐르게 할 수 있다.
+  캐피시터 : 높은 주파수의 전압 일수록 저항을 못 느낀다. - 단위 패럿
+    C가 작을수록 전류는 더 조금 흐르게 할 수 있다.
+    AC입장에서 보면 Short나 다름없다.
+    Low Pass Filter - DC만 흐른다.
+  인덕터 : 높은 주파수의 전류일수록 저항을 더 크게 느낀다. - 저주파의 전류만 통과 - 급격한 신호의 흐름을 막는다. - 단위 H 헨리
+    L이 클수록  전류는 더 조금 흐르게 합니다.
+    AC입장에서 보면 Open이다.
+
+  Open / Short : 연결되어 있지 않다/연결 되어 있다.
+  
+% Analog 신호와 Digital신호, 그리고 Ground
+  high Impedance / floating : 무슨 값이 될지 모르는 상태. 
+    이 상태의 PIN은 다른 칩들에 의해서 유기 되어진 버스상의 값들의 변화에 관여하지 않는다.
+  Capacitor : 이것을 POWER line에 달아 전압/전류가 순간적으로 낮아질때 Capacitor가 저장하고 있던 전기에너지를 방출하여 
+    Power line의 전압을 원래대로 유지하는 용도로. - Decoupling condenser/Bypass condenser
+
+% 단위와 수량
+  p : pico / 10^-12
+  n : nano / 10^-9
+  u : micro / 10^-6
+  m : milli / 10^-3
+  k : kilo / 10^3
+  M : mega / 10^6
+  
+  20 KHz = 1/20 KHz -> 50 us 마다 한번식 다시 0으로 돌아온다.
+  
+  Amplitude : 크기 또는 높이
+  
+
 % MMU (Memory Management Unit)
   1. Task 마다 또는 프로그램 마다 똑같은 주소를 사용해도 되게 만들어 준다.
   2. 두개의 CS를 사용하는 RAM의 물리적 주소가 CS1:0x00000~0x10000, CS2:0x20000~0x30000 이렇게 나뉘어져 있어도 MMU만 잘 사용하면
