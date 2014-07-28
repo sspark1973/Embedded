@@ -1,3 +1,35 @@
+% AMBA - SoC안에서 IP끼리의 Bus규격
+AMBA : Bus들을 어떻게 연결하고, IP끼리 서로 어떻게 통신 할 것이냐를 약속한 것
+	Bus Interface : Bus위에 Data를 어떻게 전송할 것이냐, 어떻게 받을거냐를 잘 control해주는 interface – AHB / ASB / APB
+	  
+% ARM Register 와 Context
+Banked Register : Mode별로 따로 가지고 있는 Register
+Thumb mode : R0 ~ R7
+ARM mode : R0 ~ R12
+
+% ARM 동작 Modes
+Normal Mode - USR
+Privileged Mode – SYS / SVC / IRQ / FIQ / ABT / UND
+	Interrupt의 사용 가능 유무를 직접 설정
+	서로 Mode변경이 자유롭다
+ARM의 Default Mode? SVC mode에서 출발(or Reset)해야 boot up시에 ARM에 대한 모든 권한을 행사
+
+% RAM Memory의 물리적 동작
+	Address Bus Width가 16bit이면 최대로 나타낼 수 있는 Memory Size는 얼마인가?
+	2^16만큼 Address를 표현 64KB -> 16bit씩 access하는 system에서는 얼마나 큰 Address 크기를 나타낼 수 있을까요? -> 2배하면 된다. 128KB
+
+% Memory의 선정과 XIP
+	XIP(Execute In Place) – 메모리 상에서 직접 program/code를 실행할 수 있는 기술
+		Random Access가 가능해야한다. 
+		Word단위의 Access가 가능하여 Software를 Execution할 수 있는 것.
+		RAM / NOR flash
+	eMMC는 XIP기능이 있는가?
+
+	DRAM : 일정 시간마다 다시 전하를 충전해줘야 Data를 잃어버리지 않는다. (사용자설정)
+	DDR(Double Data Rate) – Bus Clock의 rising/falling edge에서 모두 동작-두배로 빠르다.
+	Synchronous – System Bus의 Clock으로 동기를 맞춘다. (거의 CPU의 동작에 맞추어 동작한다.)
+	ROM – Flash Memory(Burning이 가능)
+
 % Pull up, Pull down 그리고 Open Collector
   Low Active : 0에서 동작 : CS/, CS_N, CS* ...
     Pull-up : default 1 (전원쪽에 저항)
@@ -8,14 +40,16 @@
 
 % 초간단 회로이론 R 저항 L 인덕터 C 캐패시터
   저항 : 특정부분에 흐르는 전류의 양을 제한 / 전압 감소 
-    R이 클수록 전류를 더 조금 흐르게 할 수 있다.
-  캐피시터 : 높은 주파수의 전압 일수록 저항을 못 느낀다. - 단위 패럿
-    C가 작을수록 전류는 더 조금 흐르게 할 수 있다.
-    AC입장에서 보면 Short나 다름없다.
-    Low Pass Filter - DC만 흐른다.
-  인덕터 : 높은 주파수의 전류일수록 저항을 더 크게 느낀다. - 저주파의 전류만 통과 - 급격한 신호의 흐름을 막는다. - 단위 H 헨리
-    L이 클수록  전류는 더 조금 흐르게 합니다.
-    AC입장에서 보면 Open이다.
+    	R이 클수록 전류를 더 조금 흐르게 할 수 있다.
+  캐피시터(C) : 높은 주파수의 전압 일수록 저항을 못 느낀다. - 단위 패럿
+    	C가 작을수록 전류는 더 조금 흐르게 할 수 있다.
+    	AC입장에서 보면 Short나 다름없다.
+    	Low Pass Filter - DC만 흐른다. (AC를 GND로 흐르게 한다)
+		전원이 켜질 때 Transition으로 생기는 Noise따위를 제거하기 위한 것…- Ripple제거
+  인덕터(L) : 높은 주파수의 전류일수록 저항을 더 크게 느낀다. – 
+저주파의 전류만 통과 - 급격한 신호의 흐름을 막는다. - 단위 H 헨리
+    	L이 클수록  전류는 더 조금 흐르게 합니다.
+    	AC입장에서 보면 Open이다.
 
   Open / Short : 연결되어 있지 않다/연결 되어 있다.
   
@@ -24,6 +58,8 @@
     이 상태의 PIN은 다른 칩들에 의해서 유기 되어진 버스상의 값들의 변화에 관여하지 않는다.
   Capacitor : 이것을 POWER line에 달아 전압/전류가 순간적으로 낮아질때 Capacitor가 저장하고 있던 전기에너지를 방출하여 
     Power line의 전압을 원래대로 유지하는 용도로. - Decoupling condenser/Bypass condenser
+    Decoupling Capacitor : Noise/Ripple 성분을 전원공급에서 떼내어 버린다는 것을 뜻한다.
+    Bypass Capacitor : Noise/Ripple성분을 주파수 특성을 이용하여 GND로 통과시켜버린다는 의미
 
 % 단위와 수량
   p : pico / 10^-12
@@ -32,6 +68,10 @@
   m : milli / 10^-3
   k : kilo / 10^3
   M : mega / 10^6
+
+  2^20 : 1 MB
+  2^10 : 1 KB
+  2^16 : 64 KB
   
   20 KHz = 1/20 KHz -> 50 us 마다 한번식 다시 0으로 돌아온다.
   
