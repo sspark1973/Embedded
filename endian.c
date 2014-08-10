@@ -1,6 +1,18 @@
 #include <stdio.h>
 #include "type_def.h"
 
+#define BIG_ENDIAN 0
+#define LITTLE_ENDIAN 1
+
+int TestByteOrder()
+{
+	short int word = 0x0001;
+	char *byte = (char *)&word;
+
+	printf("sizeof(short int) = %d\n", sizeof(short int));
+	return (byte[0] ? LITTLE_ENDIAN :  BIG_ENDIAN);
+}
+
 bool8 isLittleEndian()
 {
   int test_num = 1;
@@ -38,5 +50,7 @@ main()
 
   int i = 0x01234567;
   show_mem_rep((char *)&i, sizeof(i));
+
+  printf("TestByteOrder = [%d]\n", TestByteOrder());
   
 }
