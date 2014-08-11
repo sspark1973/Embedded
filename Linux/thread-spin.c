@@ -1,8 +1,9 @@
 /*
 We¡¯ve shown how to use a mutex to protect a variable against simultaneous access by
-two threads and how to use semaphores to implement a shared counter.A condition
-variable is a third synchronization device that GNU/Linux provides; with it, you can
-implement more complex conditions under which threads execute.
+two threads and how to use semaphores to implement a shared counter.
+
+A condition variable is a third synchronization device that GNU/Linux provides; 
+with it, you can implement more complex conditions under which threads execute.
 
 A Simple Condition Variable Implementation
 
@@ -52,6 +53,7 @@ void *thread_function(void *args)
 		}
 		// flag_is_set = thread_flag;
 		//printf("%s : flag_is_set[%d]!\n", __FUNCTION__, flag_is_set);
+		printf("%s : thread_flag_cv[%d]!\n", __FUNCTION__, thread_flag_cv);
 
 		/* When we¡¯ve gotten here, we know the flag must be set. Unlock
 			the mutex. */
