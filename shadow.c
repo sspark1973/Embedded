@@ -5,7 +5,7 @@ typedef struct
 {
   int32 flag:3;
   int32 data_1:20;
-  int32 data_2:9;
+  int32 data_2:10;
 } REGISTER_SHADOW;
 
 int main(int argc, char **argv)
@@ -16,7 +16,8 @@ int main(int argc, char **argv)
   R_0.flag = 2;
   R_0.data_1 = 16;
   R_0.data_2 = 22;
-  
+
+  printf("sizeof R_0 = [%d]\n", sizeof(REGISTER_SHADOW));
   printf("flag[%d] data1[%d] data2[%d]\n", R_0.flag, R_0.data_1, R_0.data_2);
   
   if(reg_data & 0x20) // binary 100000 - mask

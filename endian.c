@@ -17,7 +17,10 @@ bool8 isLittleEndian()
 {
   int test_num = 1;
   char *ptr;
-  
+
+  // char pointer
+  // MSB - Low address : BIG Endian
+  // LSB - Low address : Little Endian
   ptr = (char*)&test_num;
   printf("ptr is %d\n", *ptr);
   
@@ -49,6 +52,11 @@ main()
   isLittleEndian();
 
   int i = 0x01234567;
+  char *ptr = (char *)&i;
+
+  printf("%x\t %x\n", *ptr, *(ptr+1));
+
+  
   show_mem_rep((char *)&i, sizeof(i));
 
   printf("TestByteOrder = [%d]\n", TestByteOrder());

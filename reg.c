@@ -2,10 +2,13 @@
 #include <stddef.h>
 //#include "type_def.h"
 
-#define DEBUG_PORT ((unsigned char*)(0x7E00F804))
+typedef unsigned int dword;
+//volatile dword *pwr_cfg;
+//pwr_cfg = (volatile dword *)0x7E00F804;
 
-//typedef unsigned long dword;
-volatile unsigned char *pwr_cfg = (volatile unsigned char *)DEBUG_PORT;
+#define DEBUG_PORT ((dword*)(0x7E00F804))
+
+volatile dword *pwr_cfg = (volatile dword *)DEBUG_PORT;
 //unsigned char *pwr_cfg;
 //pwr_cfg = DEBUG_PORT;
 
@@ -25,10 +28,18 @@ struct flexarray
 {
   char val;
   char val2;
-  int array[];
+  //int array[];
+  int *array;
 };
 
-void set_pwr_cfg(unsigned char value)
+struct bitarray {
+	unsigned int a:1;
+	unsigned int b:1;
+	unsigned int c:1;
+
+};
+
+void set_pwr_cfg(unsigned int value)
 {
   *pwr_cfg = value;
 }
@@ -37,11 +48,18 @@ int main(int argc, char **argv)
 {
   printf("%d\n", sizeof(unsigned char));
   printf("%d\n", sizeof(int));
+  printf("pwr_cfg [%#010x]\n", pwr_cfg);
   
   printf("offsetof (flexarray, val) = %d\n", offsetof(struct flexarray, val));
   printf("offsetof (flexarray, val2) = %d\n", offsetof(struct flexarray, val2));
   printf("offsetof (flexarray, array) = %d\n", offsetof(struct flexarray, array));
   printf("sizeof (struct flexarray) = %d\n", sizeof(struct flexarray));
+
+  printf("sizeof (struct bitarray) = %d\n", sizeof(struct bitarray));
+
+  char c = 'A';
+
+  printf("A = %#04x\n", c);
   
   return 0;
 }
